@@ -25,16 +25,14 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
       # your stuff
-      - uses: zattoo/publish@v1
-        with:
+      - uses: actions/github-script@v6
+        with: 
           github_token: ${{github.token}}
-          sources: 'target/*'
-#      # Runs a single command using the runners shell
-#      - name: Run a one-line script
-#        run: echo Hello, world!
-#
-#      # Runs a set of commands using the runners shell
-#      - name: Run a multi-line script
-#        run: |
-#          echo Add other actions to build,
-#          echo test, and deploy your project.
+          script: |
+            const dateformat = require('dateformat')
+            const now = new Date()
+            const tag_name = now.format('yyyymmdd-hhmmss')
+            github.rest.repos.createRelease({
+             owner: context.repo.owner,
+             repo: context.repo.repo,
+             tag_name})
