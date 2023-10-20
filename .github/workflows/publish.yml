@@ -33,9 +33,9 @@ jobs:
         with: 
           github_token: ${{github.token}}
           script: |
-            const dateformat = require('dateformat')
+            import dateFormat, { masks } from "dateformat"
             const now = new Date()
-            const tag_name = now.format('yyyymmdd-hhmmss')
+            const tag_name = dateFormat(now,'yyyymmdd-hhmmss')
             github.rest.repos.createRelease({
              owner: context.repo.owner,
              repo: context.repo.repo,
