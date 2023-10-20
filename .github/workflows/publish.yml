@@ -41,7 +41,7 @@ jobs:
               repo: context.repo.repo,
               tag_name})
             await github.request('POST /repos/{owner}/{repo}/releases/{release_id}/assets{?name,label}', {
-            github.rest.repos.uploadReleaseAsset( {
+#            github.rest.repos.uploadReleaseAsset( {
               owner: context.repo.owner,
               repo: context.repo.repo,
               release_id: releaseInfo.id,
