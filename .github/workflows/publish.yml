@@ -28,14 +28,13 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 20
-      - run: npm install dateformat
+      - run: npm install moment
       - uses: actions/github-script@v6
         with: 
-          github_token: ${{github.token}}
+          github-token: ${{github.token}}
           script: |
-            import dateFormat, { masks } from "dateformat"
-            const now = new Date()
-            const tag_name = dateFormat(now,'yyyymmdd-hhmmss')
+            const moment = require('moment')
+            const tag_name = moment().format(now,'yyyymmdd-hhmmss')
             github.rest.repos.createRelease({
              owner: context.repo.owner,
              repo: context.repo.repo,
