@@ -31,7 +31,7 @@ jobs:
       - run: npm install moment
       - uses: actions/github-script@v6
         with: 
-          github-token: ${{github.token}}
+#          github-token: ${{github.token}}
           script: |
             const moment = require('moment')
             const tag_name = moment().format('YYYYMMDD-HHmmss')
