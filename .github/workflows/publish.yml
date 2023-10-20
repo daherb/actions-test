@@ -40,8 +40,9 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               tag_name})
-            octokit.request('POST /repos/{owner}/{repo}/releases/{release_id}/assets{?name,label}', {
+            github.rest.uploadReleaseAsset.request( {
               owner: context.repo.owner,
               repo: context.repo.repo,
               release_id: releaseInfo.id,
+              name: "file.lst",
               data: '@file.lst'})
