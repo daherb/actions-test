@@ -25,7 +25,7 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
       # your stuff
-      - uses: zattoo/publish@v1
+      - uses: zattoo/publish@v1.1.2
         with:
           github_token: ${{github.token}}
           sources: 'target/*'
