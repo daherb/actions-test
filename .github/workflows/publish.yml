@@ -38,4 +38,5 @@ jobs:
       - uses: actions/github-script@v6
         with:
 #          github-token: ${{github.token}}
-          script: publish.js
+          script: | const script = require('./publish.js')
+                    console.log(script({github, context}))
