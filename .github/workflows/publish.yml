@@ -34,10 +34,9 @@ jobs:
         with:
           node-version: 20
       - run: npm install moment
-      - run: find . > file.lst
       - uses: actions/github-script@v6
         with:
-          debug: true
+          debug: false
           script: | 
             const script = require('./.github/workflows/publish.js');
             script.publish(github,context);
