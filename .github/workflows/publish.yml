@@ -40,4 +40,4 @@ jobs:
 #          github-token: ${{github.token}}
           script: | 
             const script = require('./.github/workflows/publish.js')
-            console.log(script({github, context}))
+            console.log(script)
