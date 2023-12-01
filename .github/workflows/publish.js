@@ -5,6 +5,7 @@ function publish(github, context) {
 	     owner: context.repo.owner,
 	     repo: context.repo.repo,
 	     tag_name});
+	console.log(releaseInfo);
 	github.request('POST /repos/{owner}/{repo}/releases/{release_id}/assets{?name,label}', {
 	     owner: context.repo.owner,
 	     repo: context.repo.repo,
