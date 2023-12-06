@@ -6,7 +6,7 @@ function publish(github, context) {
 	     repo: context.repo.repo,
 	     tag_name});
         console.log(releaseInfo);
-        octokit.rest.repos.uploadReleaseAsset({
+        github.rest.repos.uploadReleaseAsset({
 	     owner: context.repo.owner,
 	     repo: context.repo.repo,
 	     release_id: tag_name,
