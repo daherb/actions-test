@@ -10,8 +10,8 @@ function publish(github, context) {
 	     owner: context.repo.owner,
 	     repo: context.repo.repo,
 	     release_id: tag_name,
-	     name: "blank",
-	    data: [],
+	     name: "test.txt",
+	    data: "testdata",
 });
 //	github.request('POST /repos/{owner}/{repo}/releases/{release_id}/assets{?name,label}', {
 //	     owner: context.repo.owner,
