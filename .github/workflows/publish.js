@@ -20,7 +20,7 @@ function publish(github, context) {
 	});
         releaseId = release.data.id;
         releaseUrl = release.data.upload_url;
-        octokit.request({
+        github.request({
              method: "POST",
              url: releaseUrl,
              headers: {
