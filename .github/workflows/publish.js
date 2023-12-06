@@ -21,16 +21,15 @@ function publish(github, context) {
         releaseId = release.data.id;
         releaseUrl = release.data.upload_url;
         octokit.request({
-          method: "POST",
-          url: releaseUrl,
-          headers: {
-            "content-type": "text/plain",
-          },
-          data: "Hello, world!\n",
-          name: "test-upload.txt",
-          label: "test",
+             method: "POST",
+             url: releaseUrl,
+             headers: {
+		 "content-type": "text/plain",
+             },
+             data: "Hello, world!\n",
+             name: "test-upload.txt",
+            label: "test",
         });
-      })
 //	github.request('POST /repos/{owner}/{repo}/releases/{release_id}/assets{?name,label}', {
 //	     owner: context.repo.owner,
 //	     repo: context.repo.repo,
