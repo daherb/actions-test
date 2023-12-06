@@ -46,3 +46,24 @@ jobs:
               repo: context.repo.repo,
               tag_name});
             console.log(releaseInfo);
+      - uses: actions/github-script@v6
+        with:
+          debug: false
+          script: | 
+            release = await github.rest.repos.getLatestRelease({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+            });
+            releaseId = release.data.id;
+            releaseUrl = release.data.upload_url;
+            result = await github.request({
+              method: "POST",
+              url: releaseUrl,
+              headers: {
+                "content-type": "text/plain",
+                },
+              data: "Hello, world!\n",
+              name: "test-upload.txt",
+              label: "test",
+              });
+            console.log(result);
