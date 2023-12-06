@@ -5,7 +5,14 @@ function publish(github, context) {
 	     owner: context.repo.owner,
 	     repo: context.repo.repo,
 	     tag_name});
-	console.log(releaseInfo);
+        console.log(releaseInfo);
+        octokit.rest.repos.uploadReleaseAsset({
+	     owner: context.repo.owner,
+	     repo: context.repo.repo,
+	     release_id: tag_name,
+	     name: "blank",
+	    data: [],
+});
 //	github.request('POST /repos/{owner}/{repo}/releases/{release_id}/assets{?name,label}', {
 //	     owner: context.repo.owner,
 //	     repo: context.repo.repo,
