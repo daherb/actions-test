@@ -13,7 +13,7 @@ function publish(github, context) {
 // 	     name: "test.txt",
 // 	    data: "testdata",
     // });
-        release = octokit.rest.repos.getReleaseByTag({
+        release = github.rest.repos.getReleaseByTag({
              owner: context.repo.owner,
              repo: context.repo.repo,
              tag: tag_name,
