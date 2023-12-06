@@ -40,23 +40,15 @@ jobs:
           debug: false
           script: | 
             const moment = require('moment')
+            const fs = require('fs');
             tag_name = moment().format('YYYYMMDD-HHmmss');
             releaseInfo = await github.rest.repos.createRelease({
               owner: context.repo.owner,
               repo: context.repo.repo,
               tag_name});
             console.log(releaseInfo);
-      - uses: actions/github-script@v6
-        with:
-          debug: false
-          script: |
-            const fs = require("fs");
-            release = await github.rest.repos.getLatestRelease({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-            });
-            releaseId = release.data.id;
-            releaseUrl = release.data.upload_url;
+            releaseId = releaseInfo.data.id;
+            releaseUrl = releaseInfo.data.upload_url;
             fileData = fs.readFileSync("file.lst", "utf-8");
             result = await github.request({
               method: "POST",
