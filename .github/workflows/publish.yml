@@ -34,6 +34,7 @@ jobs:
         with:
           node-version: 20
       - run: npm install moment
+      - run: find . | tee file.lst
       - uses: actions/github-script@v6
         with:
           debug: false
