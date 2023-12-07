@@ -68,7 +68,7 @@ jobs:
               method: "POST",
               url: releaseUrl,
               headers: {
-                "content-type": "text/plain",
+                "content-type": "application/zip",
                 },
               data: Buffer(fileData).toString('base64'),
               name: "packed.zip",
