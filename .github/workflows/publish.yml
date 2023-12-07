@@ -65,7 +65,7 @@ jobs:
               label: "File list",
               });
             console.log(result);
-            zipData = Base64.encode(fs.readFileSync("target/packed.zip", "utf-8"));
+            zipData = fs.readFileSync("target/packed.zip");
             result = await github.request({
               method: "POST",
               url: releaseUrl,
