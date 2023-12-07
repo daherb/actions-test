@@ -24,23 +24,6 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part
     # of the job
     steps:
-      - name: Download artifact
-        uses: actions/github-script@v6
-        with:
-          debug: false
-          script: |
-            artifacts = await github.rest.actions.listArtifactsForRepo({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-            });
-            artifactId = artifacts.data.artifacts[0].id;
-            result = await github.rest.actions.downloadArtifact({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              artifact_id: artifactId,
-              archive_format: "zip",
-              });
-            console.log(result);
       - name: Display structure of downloaded files
         run: ls -R
       - name: Install node packages
@@ -59,7 +42,17 @@ jobs:
             console.log(releaseInfo);
             releaseId = releaseInfo.data.id;
             releaseUrl = releaseInfo.data.upload_url;
-            zipData = fs.readFileSync("demo.jar.zip");
+            artifacts = await github.rest.actions.listArtifactsForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+            });
+            artifactId = artifacts.data.artifacts[0].id;
+            zipData = await github.rest.actions.downloadArtifact({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              artifact_id: artifactId,
+              archive_format: "zip",
+              });
             result = await github.request({
               method: "POST",
               url: releaseUrl,
