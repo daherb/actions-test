@@ -38,9 +38,9 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               artifactId,
-              "zip"
-              })
-            console.log(result)
+              "zip",
+              });
+            console.log(result);
       - name: Display structure of downloaded files
         run: ls -R
       - name: Install node packages
