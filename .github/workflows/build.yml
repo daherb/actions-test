@@ -33,8 +33,6 @@ jobs:
           java-version: '18'
           distribution: 'temurin'
           cache: maven
-      - name: Download depencencies
-        run: cd lib && bash download.sh && cd ..
       - name: Build with Maven
         run: ./mvnw clean test compile package
       - name: Publish result
