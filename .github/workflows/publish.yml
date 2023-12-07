@@ -37,8 +37,8 @@ jobs:
             result = await github.rest.actions.downloadArtifact({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              artifactId,
-              "zip",
+              artifact_id: artifactId,
+              archive_format: "zip",
               });
             console.log(result);
       - name: Display structure of downloaded files
