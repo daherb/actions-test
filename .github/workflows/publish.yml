@@ -61,15 +61,15 @@ jobs:
               label: "File list",
               });
             console.log(result);
-            fileData = fs.readFileSync("target/test.txt", "utf-8");
+            fileData = fs.readFileSync("target/packed.zip", "utf-8");
             result = await github.request({
               method: "POST",
               url: releaseUrl,
               headers: {
                 "content-type": "text/plain",
                 },
-              data: fileData,
-              name: "test.txt",
+              data: Buffer(fileData).toString('base64'),
+              name: "packed.zip",
               label: "Target",
               });
             console.log(result);
