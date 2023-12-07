@@ -33,7 +33,6 @@ jobs:
           script: |
             const moment = require('moment')
             const fs = require('fs');
-            const { Base64 } = require('js-base64');
             tag_name = moment().format('YYYYMMDD-HHmmss');
             releaseInfo = await github.rest.repos.createRelease({
               owner: context.repo.owner,
