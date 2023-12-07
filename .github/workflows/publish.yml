@@ -47,12 +47,13 @@ jobs:
               repo: context.repo.repo,
             });
             artifactId = artifacts.data.artifacts[0].id;
-            zipData = await github.rest.actions.downloadArtifact({
+            result = await github.rest.actions.downloadArtifact({
               owner: context.repo.owner,
               repo: context.repo.repo,
               artifact_id: artifactId,
               archive_format: "zip",
               });
+            zipData = result.data;
             result = await github.request({
               method: "POST",
               url: releaseUrl,
