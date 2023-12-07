@@ -25,11 +25,8 @@ jobs:
     # of the job
     steps:
       - uses: actions/download-artifact@v3
-        with:
-          path: artifact
       - name: Display structure of downloaded files
         run: ls -R
-        working-directory: artifact
       - uses: actions/github-script@v6
         with:
           debug: false
