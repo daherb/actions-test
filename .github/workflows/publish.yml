@@ -5,12 +5,10 @@ name: CI publish
 
 # Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for
-  # the "main" branch
-  push:
-    branches: ["main"]
-  pull_request:
-    branches: ["main"]
+   workflow_run:
+    workflows: [CI build]
+    types:
+      - completed
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -26,18 +24,12 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part
     # of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job
-      # can access it
-      - uses: actions/checkout@v3
-      # your stuff
-      - uses: actions/setup-node@v3
+      - uses: actions/download-artifact@v3
         with:
-          node-version: 20
-      - run: npm install moment js-base64
-      - run: dd if=/dev/urandom of=$(date '+%Y%m%d-%H%M').bin bs=2M count=1
-      - run: zip target/packed.zip *.bin
-      - run: ls -l target/*
-      - run: find . | tee file.lst
+          path: artifact
+      - name: Display structure of downloaded files
+        run: ls -R
+        working-directory: artifact
       - uses: actions/github-script@v6
         with:
           debug: false
@@ -53,19 +45,7 @@ jobs:
             console.log(releaseInfo);
             releaseId = releaseInfo.data.id;
             releaseUrl = releaseInfo.data.upload_url;
-            fileData = fs.readFileSync("file.lst", "utf-8");
-            result = await github.request({
-              method: "POST",
-              url: releaseUrl,
-              headers: {
-                "content-type": "text/plain",
-                },
-              data: fileData,
-              name: "file.lst",
-              label: "File list",
-              });
-            console.log(result);
-            zipData = fs.readFileSync("target/packed.zip");
+            zipData = fs.readFileSync("demo.jar.zip");
             result = await github.request({
               method: "POST",
               url: releaseUrl,
