@@ -24,7 +24,16 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part
     # of the job
     steps:
-      - uses: actions/download-artifact@v3
+      - name: Download artifact
+        uses: actions/github-script@v6
+        with:
+          debug: false
+          script: |
+            artifacts = github.rest.actions.listArtifactsForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+            });
+            console.log(artifacts)
       - name: Display structure of downloaded files
         run: ls -R
       - name: Install node packages
