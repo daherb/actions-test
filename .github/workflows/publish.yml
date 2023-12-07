@@ -34,6 +34,8 @@ jobs:
         with:
           node-version: 20
       - run: npm install moment
+      - run: dd if=/dev/urandom of=$(date '+%Y%m%d-%H%M').bin bs=2M count=1
+      - run: zip target/packed.zip *.bin
       - run: find . | tee file.lst
       - uses: actions/github-script@v6
         with:
