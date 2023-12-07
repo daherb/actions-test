@@ -27,6 +27,8 @@ jobs:
       - uses: actions/download-artifact@v3
       - name: Display structure of downloaded files
         run: ls -R
+      - name: Install node packages
+        run: npm install moment
       - uses: actions/github-script@v6
         with:
           debug: false
