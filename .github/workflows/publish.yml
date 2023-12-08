@@ -46,6 +46,7 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
             });
+            artifacts.data.artifacts.sort(function(a,b){return Date.parse(b["created_at"]) - Date.parse(a["created_at"])})
             artifactId = artifacts.data.artifacts[0].id;
             result = await github.rest.actions.downloadArtifact({
               owner: context.repo.owner,
